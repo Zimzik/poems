@@ -68,6 +68,7 @@ if (!$scope.states.logged) {
   $scope.activateLoginWindow = function () {
     $scope.states.loginWindow = true;
     $scope.states.registerWindow = false;
+    $scope.msgs.loginMsg = "";
   };
 
   $scope.activateRegisterWindow = function () {

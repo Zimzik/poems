@@ -2,7 +2,7 @@
 <html lang="en" ng-app="SomeApp">
 <head>
   <meta charset="UTF-8">
-  <title>Appliances</title>
+  <title>Poems</title>
   <script src="libs/angular.min.js"></script>
   <link rel="stylesheet" href="libs/bootstrap-theme.min.css">
   <link rel="stylesheet" href="libs/bootstrap.min.css">
@@ -17,13 +17,23 @@
 <div class="container" ng-if="states.logged">
   <div class="panel panel-default">
     <div class="panel-heading clearfix">
-      <h3 class="col-md-4">Appliances electricity</h3>
+      <h3 class="col-md-4">Poems</h3>
       <div class="user-block col-md-2 col-md-offset-6">
         <span class="user">{{states.activeUser}}</span>
         <button class="btn btn-primary btn-sm" ng-click="logOff()">Log Off</button>
       </div>
     </div>
     <div class="panel-body">
+      <div class="panel-body">
+        <form class="col-md-5">
+          <input type="text" placeholder="Poem title">
+          <textarea placeholder="Poem" cols="30" rows="10"></textarea>
+          
+        </form>
+      </div>
+      <form class="col-md-3 col-md-offset-9">
+        <button title="New poem">New poem <span class="glyphicon glyphicon-plus"></span></button>
+      </form>
     </div>
   </div>
 </div>
