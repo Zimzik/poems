@@ -1,0 +1,13 @@
+body {
+  background:#000 url(image2.jpg) no-repeat;
+  padding-top: 30px;
+}
+
+h3 {
+  margin: 0;
+  padding: 0;
+}
+
+.panel-heading {
+  padding-top: 20px;
+}

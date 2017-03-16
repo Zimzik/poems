@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="SomeApp">
+<head>
+  <meta charset="UTF-8">
+  <title>Appliances</title>
+  <script src="libs/angular.min.js"></script>
+  <link rel="stylesheet" href="libs/bootstrap-theme.min.css">
+  <link rel="stylesheet" href="libs/bootstrap.min.css">
+  <script src="js/script.js"></script>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body ng-controller="SomeAppCtrl">
+
+<!--Main workspace-->
+ 
+<div class="container" ng-if="states.logged">
+  <div class="panel panel-default">
+    <div class="panel-heading clearfix">
+      <h3 class="col-md-4">Appliances electricity</h3>
+      <div class="user-block col-md-2 col-md-offset-6">
+        <span class="user">{{states.activeUser}}</span>
+        <button class="btn btn-primary btn-sm" ng-click="logOff()">Log Off</button>
+      </div>
+    </div>
+    <div class="panel-body">
+    </div>
+  </div>
+</div>
+  
+<!--Log in window-->
+
+<form ng-if="states.loginWindow">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="text-center">Welcome</h1>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <input type="text" class="form-control input-lg " ng-model="userInfo.userLogin" placeholder="Username" />
+        </div>
+
+        <div class="form-group">
+          <input type="password" class="form-control input-lg" ng-model="userInfo.userPass" placeholder="Password" />
+          <p ng-class="states.loginWarning ? 'bg-success' : 'bg-danger'">{{msgs.loginMsg}}</p>
+        </div>
+
+        <div class="form-group">
+          <input type="submit" class="btn btn-block btn-lg btn-primary" value="Login" ng-click="login()"/>
+          <span class="pull-right"><a href="#" ng-click="activateRegisterWindow()">Register</a></span>
+        </div>
+      </div>
+    </div>
+  </div>
+  </form>
+
+<!--Register window-->
+
+<form ng-if="states.registerWindow">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="text-center">Registration: </h1>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <input type="text" class="form-control input-lg" ng-model="userInfo.userLogin" placeholder="Username" />
+        </div>
+
+        <div class="form-group">
+          <input type="password" class="form-control input-lg"ng-model="userInfo.userPass" placeholder="Password" />
+        </div>
+
+        <div class="form-group">
+          <input type="password" class="form-control input-lg" ng-model="userInfo.confUserPass" placeholder="Confirm password" />
+          <p class="bg-danger" ng-show="states.passConfWarning">Incorrect password confirmation</p>
+          <p ng-class="states.newUserCreated ? 'bg-success' : 'bg-danger'">{{msgs.regMsg}}</p>
+        </div>
+
+        <div class="form-group">
+          <input type="submit" class="btn btn-block btn-lg btn-primary" ng-click="registration()" value="Register" />
+          <span class="pull-right"><a href="#" ng-click="activateLoginWindow()">Login</a></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+  
+</body>
+</html>
