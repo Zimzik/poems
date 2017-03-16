@@ -1,5 +1,5 @@
-angular.module("SomeApp", [])
-  .controller("SomeAppCtrl", function($scope, $http) {
+var app = angular.module("SomeApp", []);
+  app.controller("SomeAppCtrl", function($scope, $http) {
   
   $scope.states = {
     loginWindow: false,

@@ -11,3 +11,22 @@ h3 {
 .panel-heading {
   padding-top: 20px;
 }
+
+#messageBlock {
+  margin-top: 20px;
+}
+
+.poems-list ul {
+  list-style: none;
+  max-height: 400px;
+  overflow: scroll;
+}
+
+.poems-list ul p {
+  margin: 0;
+  padding: 0;
+}
+
+.poems-list ul li {
+  cursor: pointer;
+}

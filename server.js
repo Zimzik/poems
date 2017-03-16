@@ -6,9 +6,12 @@ var morgan      = require('morgan');
 var mongoose    = require('mongoose');
 var passport	= require('passport');
 var config      = require('./config/database'); // get db config file
-var User        = require('./app/models/user'); // get the mongoose model
+var User        = require('./app/models/user'); // get the mongoose user model
+var Poem        = require('./app/models/poem'); // get the mongoose poem model
 var port        = process.env.PORT || 8080;
 var jwt         = require('jwt-simple');
+var jade        = require('jade');
+var moment      = require('moment');
  
 // get our request parameters
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -100,7 +103,42 @@ apiRoutes.get('/memberinfo', passport.authenticate('jwt', { session: false}), fu
     return res.status(403).send({success: false, msg: 'No token provided.'});
   }
 });
- 
+
+apiRoutes.post('/savePoem', function(req, res) {
+  let newPoem = new Poem({
+    title: req.body.title,
+    body: req.body.body,
+    date: req.body.date
+  });
+  
+  newPoem.save(function(err) {
+    if (err) {
+      console.log(err);
+      res.json({success: false});
+    } else {
+      console.log("Data saved on db");
+      res.json({success: true, msg: "Data has been saved on db!"})
+    }
+  })
+});
+
+apiRoutes.post('/poemsList', function(req, res) {
+  Poem.find(function(err, poems) {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(poems);
+      let newList = poems.map(function(el) {
+        /*let date = new Date(el.date);*/
+        el.date = moment(el.date).format('YYYY-DD-MM');
+        return el;
+      });
+      res.json({success: true, poemsList: newList});
+    }
+  })
+})
+               
+               
 getToken = function (headers) {
   if (headers && headers.authorization) {
     var parted = headers.authorization.split(' ');

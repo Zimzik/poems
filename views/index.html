@@ -7,7 +7,9 @@
   <link rel="stylesheet" href="libs/bootstrap-theme.min.css">
   <link rel="stylesheet" href="libs/bootstrap.min.css">
   <script src="js/script.js"></script>
+  <script src="libs/jquery-3.1.1.min.js"></script>
   <link rel="stylesheet" href="css/style.css">
+  <script src="js/poemController.js"></script>
 </head>
 
 <body ng-controller="SomeAppCtrl">
@@ -24,20 +26,45 @@
       </div>
     </div>
     <div class="panel-body">
-      <div class="panel-body">
-        <form class="col-md-5">
-          <input type="text" placeholder="Poem title">
-          <textarea placeholder="Poem" cols="30" rows="10"></textarea>
-          
-        </form>
-      </div>
       <form class="col-md-3 col-md-offset-9">
         <button title="New poem">New poem <span class="glyphicon glyphicon-plus"></span></button>
       </form>
+
+
+      <div class="panel-body" ng-controller="PoemCtrl">
+        <div class="row">
+          <form id="add-poem" method="post" class="col-md-6">
+            <h3>Add new poem</h3>
+            <div class="form-group">
+              <label>Title:</label>
+              <input type="text" id="title" name="title" class="form-control" ng-model="poemData.title"/>
+              <p ng-show="state.titleWarning" class="bg-danger">Please, write a title of poem!</p>
+            </div>
+            <div class="form-group">
+              <label>Poem:</label>
+              <textarea name="body" rows="10" id="poem-body" class="form-control" ng-model="poemData.body"></textarea>
+              <p ng-show="state.poemBodyWarning" class="bg-danger">Please, write a poem!</p>
+            </div>
+            <div class="form-group">
+              <label>Date:</label>
+              <input type="data" id="datepicker" name="date" class="datepicker" ng-model="poemData.date"/>
+              <p ng-show="state.dateWarning" class="bg-danger">Please, set a date of poems creation!</p>
+            </div>
+            <input type="submit" value="Add poem" id="submit-btn" class="btn btn-primary" ng-click="savePoem()" />
+            <p ng-class="state.savePoemWarning ? 'bg-success' : 'bg-danger'">{{msgs.poemMsg}}</p>
+          </form>
+          <div class="poems-list col-md-4 col-md-offset-1">
+            <h3>Poems list:</h3>
+            <ul class="list-group">
+              <li><a class="list-group-item" ng-repeat="poem in poemsList">{{poem.title}}
+              <p>{{poem.date}}</p></a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
-  
 <!--Log in window-->
 
 <form ng-if="states.loginWindow">
